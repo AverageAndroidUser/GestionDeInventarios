@@ -34,10 +34,12 @@ public class TransaccionControl {
 
     @PostMapping("/Nueva_Transaccion")
     public String guardarTransaccion(Transaccion transaccion){
+        //ENTRADA
         transaccion.setFecha_pedido(new Date());
         transaccion.setTipotransaccion(1);
         repositorio.save(transaccion);
 
+        //SALIDA
         Transaccion transaccionProv = new Transaccion(transaccion.getUsuario(), transaccion.getProducto(), transaccion.getCantidad_total(),
             transaccion.getPrecio_total(), transaccion.getFecha_entrega(), transaccion.getFecha_pedido(), 0);
 
@@ -62,7 +64,7 @@ public class TransaccionControl {
         if(usuario.getTipousuario() == 2){
             model.addAttribute("Transaccionn", repositorio.findByProveedor(usuario.getID_Usuario(), 0));
         }else if (usuario.getTipousuario() == 1) {
-            model.addAttribute("Transaccionn", repositorio.findByUsuario(usuario));
+            model.addAttribute("Transaccionn", repositorio.findByUsuario(usuario.getID_Usuario(), 1));
         }
         return "Tienda/ListTransaccion";
     }

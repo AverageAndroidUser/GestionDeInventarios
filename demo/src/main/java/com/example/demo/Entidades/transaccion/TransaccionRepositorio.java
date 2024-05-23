@@ -13,7 +13,10 @@ public interface TransaccionRepositorio extends JpaRepository<Transaccion, Integ
 
     List<Transaccion> findByUsuario(Usuario usuario);
 
-    @Query("SELECT t FROM Transaccion t JOIN t.producto p WHERE p.proveedor.ID_Usuario = ?1 AND t.Tipotransaccion > ?2")
-    List<Transaccion> findByProveedor(int ID_Usuario, int tipo);
+    @Query("SELECT t FROM Transaccion t JOIN t.producto p WHERE p.proveedor.ID_Usuario = ?1 AND t.Tipotransaccion = ?2")
+    List<Transaccion> findByProveedor(int ID_Usuario, int Tipotransaccion);
+
+    @Query("SELECT t FROM Transaccion t WHERE t.usuario.ID_Usuario = ?1 AND t.Tipotransaccion = ?2")
+    List<Transaccion> findByUsuario(int ID_Usuario, int Tipotransaccion);
 
 }

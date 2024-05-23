@@ -22,34 +22,34 @@
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark">
                     <tr>
-                        <th>Ususario</th>
-                        <th>Nombre Producto</th>
-                        <th>Cantidad_total</th>
-                        <th>Fecha_entrega</th>
-                        <th>Fecha_pedido</th>
-                        <th>Tipo</th>
+                        <th>---------Ususario---------</th>
+                        <th>---------Nombre Producto---------</th>
+                        <th>---------Proveedor---------</th>
+                        <th>---------Cantidad_total---------</th>
+                        <th>---------Precio total---------</th>
+                        <th>---------Fecha_entrega---------</th>
+                        <th>---------Fecha_pedido---------</th>
+                        <th>---------Tipo---------</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="transaccion: ${Transaccionn}">
                         <td><a th:text="${transaccion.usuario.Nombre}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${transaccion.usuario.ID_Usuario}"></a></td>
-                        <td><a th:text="${transaccion.producto.Nombre}" th:href="@{/Gestion_Inventarios/Productos/VerProducto/} + ${transaccion.usuario.ID_Usuario}"></a></td>
+                        <td><a th:text="${transaccion.producto.Nombre}" th:href="@{/Gestion_Inventarios/Productos/VerProducto/} + ${transaccion.producto.ID_Producto}"></a></td>
+                        <td><a th:text="${transaccion.producto.proveedor.Nom_usuario}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${transaccion.producto.proveedor.ID_Usuario}"></a></td>
                         <td th:text="${transaccion.Cantidad_total}"></td>
                         <td th:text="${transaccion.Precio_total}"></td>
                         <td th:text="${transaccion.Fecha_entrega}"></td>
                         <td th:text="${transaccion.Fecha_pedido}"></td>
-                        <td th:text="${transaccion.Tipotransaccion}"></td>
-                        <!--
-                            <td>
-                                <span th:if="${transaccion.Tipo_transaccion == 1}" th:text="'ENTRADA'"></span>
-                                <span th:if="${transaccion.Tipo_transaccion == 0}" th:text="'SALIDA'"></span>
-                            </td>
-                        -->
+                        <td>
+                            <span th:if="${transaccion.Tipotransaccion == 1}" th:text="'ENTRADA'"></span>
+                            <span th:if="${transaccion.Tipotransaccion == 0}" th:text="'SALIDA'"></span>
+                        </td>
                     </tr>
                 </tbody>
             </table>
         </div> 
-        <a th:href="@{/Gestion_Inventarios/Tienda/}"><button type="button">Atras</button></a>
+        <a th:href="@{/Gestion_Inventarios/Productos/}"><button type="button">Atras</button></a>
     </div>
     </body>
 </html>
