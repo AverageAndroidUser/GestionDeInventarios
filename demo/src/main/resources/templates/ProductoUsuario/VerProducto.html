@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>List Users</title>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <div class="container text-center">
+        <div>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" />
+            </form>
+        </div>
+        <div>
+            <h1>List of Users</h1>
+        </div>
+        
+        <div>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Ususario</th>
+                        <th>Nombre Producto</th>
+                        <th>Descripcion</th>
+                        <th>Cantidad</th>
+                        <th>PrecioUnitario</th>
+                        <th>Proveedor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:object="${Procuctoss}">
+                        <td th:text="${Procuctoss.Usuario.Nom_usuario}"></td>
+                        <td th:text="${Procuctoss.Nombre}"></td>
+                        <td th:text="${Procuctoss.Descripcion}"></td>
+                        <td th:text="${Procuctoss.Cantidad}"></td>
+                        <td th:text="${Procuctoss.Preciounitario}"></td>
+                        <td th:text="${Procuctoss.proveedor.Nom_usuario}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+        <a th:href="@{/Gestion_Inventarios/Transaccion/Lista}"><button type="button">Atras</button></a>
+    </div>
+    </body>
+</html>

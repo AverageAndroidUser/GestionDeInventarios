@@ -8,6 +8,8 @@ import com.example.demo.Entidades.producto.Producto;
 import com.example.demo.Entidades.usuario.Usuario;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -15,7 +17,9 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Transaccion {
 
-    @Id private int ID_Transaccion;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_Transaccion;
     
     @ManyToOne
     @JoinColumn(name = "ID_Usuario")
@@ -33,6 +37,8 @@ public class Transaccion {
     
     private Date Fecha_pedido;
 
+    private int Tipotransaccion;
+
     public Transaccion() {
         super();
     }
@@ -42,8 +48,19 @@ public class Transaccion {
         this.producto = producto;
     }
 
+    public Transaccion(Usuario usuario, Producto producto, int cantidad_total, int precio_total, Date fecha_entrega,
+            Date fecha_pedido, int tipo) {
+        this.usuario = usuario;
+        this.producto = producto;
+        Cantidad_total = cantidad_total;
+        Precio_total = precio_total;
+        Fecha_entrega = fecha_entrega;
+        Fecha_pedido = fecha_pedido;
+        Tipotransaccion = tipo;
+    }
+
     public Transaccion(int iD_Transaccion, Usuario usuario, Producto producto, int cantidad_total, int precio_total,
-            Date fecha_entrega, Date fecha_pedido) {
+            Date fecha_entrega, Date fecha_pedido, int tipo) {
         ID_Transaccion = iD_Transaccion;
         this.usuario = usuario;
         this.producto = producto;
@@ -51,6 +68,7 @@ public class Transaccion {
         Precio_total = precio_total;
         Fecha_entrega = fecha_entrega;
         Fecha_pedido = fecha_pedido;
+        Tipotransaccion = tipo;
     }
 
     public int getID_Transaccion() {
@@ -109,7 +127,13 @@ public class Transaccion {
         Fecha_pedido = fecha_pedido;
     }
 
-    
+    public int getTipotransaccion() {
+        return Tipotransaccion;
+    }
+
+    public void setTipotransaccion(int tipo_transaccion) {
+        Tipotransaccion = tipo_transaccion;
+    }
 
     
     

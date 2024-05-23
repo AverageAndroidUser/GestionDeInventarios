@@ -55,4 +55,10 @@ public class ProductoControlador {
         model.addAttribute("Productoss", repositorio.findById(id).get());
         return "ProductoUsuario/EditarProducto";
     }
+
+    @GetMapping("/VerProducto/{id}")
+    public String verProducto(@PathVariable int id, Model model){
+        model.addAttribute("Procuctoss", repositorio.findById(id).get());
+        return "ProductoUsuario/VerProducto";
+    }
 }

@@ -15,6 +15,7 @@ import com.example.demo.Entidades.producto.Producto;
 import com.example.demo.Entidades.producto.ProductoRepositorio;
 import com.example.demo.Entidades.transaccion.Transaccion;
 import com.example.demo.Entidades.transaccion.TransaccionRepositorio;
+import com.example.demo.Entidades.usuario.Usuario;
 
 @Controller
 @RequestMapping("/Gestion_Inventarios/Transaccion")
@@ -34,8 +35,13 @@ public class TransaccionControl {
     @PostMapping("/Nueva_Transaccion")
     public String guardarTransaccion(Transaccion transaccion){
         transaccion.setFecha_pedido(new Date());
-
+        transaccion.setTipotransaccion(1);
         repositorio.save(transaccion);
+
+        Transaccion transaccionProv = new Transaccion(transaccion.getUsuario(), transaccion.getProducto(), transaccion.getCantidad_total(),
+            transaccion.getPrecio_total(), transaccion.getFecha_entrega(), transaccion.getFecha_pedido(), 0);
+
+        repositorio.save(transaccionProv);
         
         Producto compra = transaccion.getProducto();
         Producto nuebProducto = new Producto(transaccion.getProducto().getNombre(), transaccion.getProducto().getDescripcion(), 
@@ -50,7 +56,14 @@ public class TransaccionControl {
 
     @GetMapping("/Lista")
     public String listaTransaccion(Model model){
-        model.addAttribute("Transaccionn", repositorio.findByUsuario(usuarioLog.nombreUsuario()));
+
+        Usuario usuario = usuarioLog.nombreUsuario();
+
+        if(usuario.getTipousuario() == 2){
+            model.addAttribute("Transaccionn", repositorio.findByProveedor(usuario.getID_Usuario(), 0));
+        }else if (usuario.getTipousuario() == 1) {
+            model.addAttribute("Transaccionn", repositorio.findByUsuario(usuario));
+        }
         return "Tienda/ListTransaccion";
     }
 
