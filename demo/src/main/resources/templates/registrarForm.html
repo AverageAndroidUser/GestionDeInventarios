@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!--<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>Welcome to CodeJava Home</title>
+    </head>
+    <body>
+            <form th:action="@{/Gestion_Inventarios/guardarUsuario}" method="post" th:object = "${Usuarioss}">
+                <h1>Create Account</h1>
+                <hr />
+                <div>
+                    <input type="text" placeholder="Nombre" th:field = "${Usuarioss.Nombre}" required>
+                </div>
+                <div>
+                    <input type="text" placeholder="Usuario" th:field = ${Usuarioss.Nom_usuario} pattern="[^\s]+" title="Sin espacios"/>
+                </div>
+                <div>
+                    <input type="email" placeholder="Correo Electronico" th:field = "${Usuarioss.Correo_Electronico}" required/>
+                </div>
+                <di>
+                    <input id="NumeroCelular" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Celular" th:field = "${Usuarioss.Celular}" required/>
+                </div>
+                <div class="combo">
+                    <div>
+                        <input type="number" placeholder="Nit" th:field = "${Usuarioss.Nit}" required/>
+                    </div>
+                    <div>
+                        <input type="number" inputmode="numeric" placeholder="Cod. Postal" th:field = "${Usuarioss.Codigo_Postal}" required/>
+                    </div>
+                </div>
+                <div>
+                    <input type="number" placeholder="Usuario" th:field = ${Usuarioss.Ciudad} required/>
+                </div>
+                <div>
+                    <input type="password" placeholder="Password" pattern="[*\S$]+" title="Sin espacios" required  th:field="${Usuarioss.Contraseña}"/>
+                </div>
+                <button type="submit" >Sign Up</button>
+            </form>
+    </body>
+</html>-->
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" th:href="@{/css/main.css}">
+        <title>Gestion de Inventarios</title>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body>  
+        <div class="container" id="container">
+            <div class="form-container sign-up-container">
+                <form th:action="@{/Gestion_Inventarios/guardarUsuario}" method="post" th:object = "${Usuarioss}">
+                    <h1>Create Account</h1>
+                    <hr />
+                    <div class="group-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="text" placeholder="Nombre" th:field = "${Usuarioss.Nombre}" required minlength="10" maxlength="45">
+                    </div>
+                    <div class="group-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="text" placeholder="Usuario" th:field = ${Usuarioss.Nom_usuario} pattern="[^\s]+" title="Sin espacios" required minlength="8" maxlength="45"/>
+                    </div>
+                    <div class="group-input">
+                        <label>Tipo de Usuario:</label>
+                        <div>
+                            <input type="radio" id="usuario" name="Tipo_Usuario" th:field="${Usuarioss.tipousuario}" value="1" required>
+                            <label for="usuario">Usuario</label>
+                        </div>
+                        <div>
+                            <input type="radio" id="proveedor" name="Tipo_Usuario" th:field="${Usuarioss.tipousuario}" value="2" required>
+                            <label for="proveedor">Proveedor</label>
+                        </div>
+                    </div>
+                    <div class="group-input">
+                        <i class="fa fa-envelope"></i>
+                        <input type="email" placeholder="Correo Electronico" th:field = "${Usuarioss.Correo_Electronico}" required/>
+                    </div>
+                    <div class="group-input">
+                        <i class="fa fa-lock"></i>
+                        <input id="NumeroCelular" type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="Celular" th:field = "${Usuarioss.Celular}" required/>
+                    </div>
+                    <div class="combo">
+                        <div class="group-input" style="margin-right: 10px">
+                            <i class="fa fa-lock"></i>
+                            <input type="number" placeholder="Nit" th:field = "${Usuarioss.Nit}" required min="99999999" max="99999999999"/>
+                        </div>
+                        <div class="group-input">
+                            <i class="fa fa-lock"></i>
+                            <input type="number" inputmode="numeric" placeholder="Cod. Postal" th:field = "${Usuarioss.Codigo_Postal}" required min="100000" max="999999"/>
+                        </div>
+                    </div>
+                    <div class="combo">
+                        <div class="group-input" style="margin-right: 10px;">
+                            <select id = "departamentoLista" th:field = "${Usuarioss.ciudad.departamento}" required>
+                                <option value="" hidden>Departamento</option>
+                                <option th:each = "departamento:${Departamentoss}" th:value = "${departamento.ID_Departamento}" th:text = "${departamento.Nombre}"></option>
+                            </select>
+                        </div>
+                        <div class="group-input">
+                            <i class="fa fa-lock"></i>
+                            <select id="ciudadLista" th:field = "${Usuarioss.ciudad}" required>
+                                <option value="" hidden>Ciudad</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="group-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" placeholder="Password" pattern="[*\S$]+" title="Sin espacios" required minlength="6" maxlength="15" th:field="${Usuarioss.Contraseña}"/>
+                    </div>
+                    <button type="submit" >Sign Up</button>
+                </form>
+            </div>
+            <div class="form-container sign-in-container">
+                <form method="post" th:action="@{/login}">
+                    <h1>Sign in</h1>
+                    <hr />
+                    <div class="group-input">
+                         <i class="fa fa-envelope"></i>
+                        <input type="text" placeholder="Usuario" name = "Nom_usuario" required/>
+                    </div>
+    
+                    <div class="group-input">
+                        <i class="fa fa-lock"></i>
+                        <input type="password" placeholder="Contraseña" name = "Contraseña" required/>
+                    </div>
+                    <button type="submit">Entrar</button>
+                </form>
+            </div>
+
+            <div class="side-element-container">
+                <div class="side-element">
+                    <div class="side-element-panel side-element-left">
+                        <h1>Hello!</h1>
+                        <p>Enter your personal details and start having fun with us</p>
+                        <button class="ghost" id="signIn">Sign In1</button>
+                    </div>
+                    <div class="side-element-panel side-element-right">
+                        <h1>Welcome!</h1>
+                        <p>
+                            Happy to see you again, login and have fun with us.
+                        </p>
+                        <button class="ghost" id="signUp">Sign Up2</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script th:src="@{/js/app.js}"></script>
+</html>

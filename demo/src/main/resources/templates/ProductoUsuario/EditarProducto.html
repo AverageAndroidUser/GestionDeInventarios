@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>List Users</title>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        <form method="post" th:action="@{/Gestion_Inventarios/Productos/GuardarProducto/}" th:object="${Productoss}">
+            <input type="hidden" th:field="${Productoss.ID_Producto}">
+            <input type="text" th:field="${Productoss.Nombre}" required>
+            <input type="text" th:field="${Productoss.Descripcion}">
+            <input type="number" min="0" th:field="${Productoss.Cantidad}" required>
+            <input type="number" min="1" th:field="${Productoss.Preciounitario}" required>
+            <input type="hidden" th:field="${Productoss.usuario}" th:value="${Productoss.usuario}">
+            <input type="hidden" th:field="${Productoss.proveedor}" th:value="${Productoss.usuario}">
+            <button type="submit">GUARDAR</button>
+        </form>
+        <a th:href="@{/Gestion_Inventarios/Productos/}"><button type="button">Atras</button></a>
+    </div>
+    </body>
+</html>
