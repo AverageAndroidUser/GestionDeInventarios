@@ -11,4 +11,5 @@ import com.example.demo.Entidades.pedido.PedidoRepositorio;
 public class PedidoControl {
     
     @Autowired PedidoRepositorio repositorio;
+    //NADA
 }
