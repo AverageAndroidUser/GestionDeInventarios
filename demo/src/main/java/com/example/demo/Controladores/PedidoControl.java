@@ -11,4 +11,9 @@ import com.example.demo.Entidades.pedido.PedidoRepositorio;
 public class PedidoControl {
     
     @Autowired PedidoRepositorio repositorio;
+
+    @GetMapping("/")
+    public String nuevoPedido(Model model){
+        
+    }
 }
