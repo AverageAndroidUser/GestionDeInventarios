@@ -12,6 +12,9 @@ import com.example.demo.Entidades.usuario.Usuario;
 public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
     List<Producto> findByUsuario(Usuario usuario);
 
+    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.ID_Usuario = ?1 AND p.Cantidad > 0")
+    List<Producto> findByUsuario2(int usuario);
+
     @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.tipousuario = ?1 AND p.Cantidad > ?2")
     List<Producto> findByCantidad(int tipo, int Cantidad);
 }

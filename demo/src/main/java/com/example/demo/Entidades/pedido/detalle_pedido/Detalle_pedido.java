@@ -4,6 +4,8 @@ import com.example.demo.Entidades.pedido.Pedido;
 import com.example.demo.Entidades.producto.Producto;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,7 +13,9 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Detalle_pedido {
 
-    @Id private int ID_Detalle_Pedido;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_Detalle_Pedido;
 
     @ManyToOne
     @JoinColumn(name = "ID_Pedido")

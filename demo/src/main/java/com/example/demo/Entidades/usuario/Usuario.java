@@ -3,6 +3,8 @@ package com.example.demo.Entidades.usuario;
 import com.example.demo.Entidades.ciudad.Ciudad;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -10,7 +12,9 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Usuario {
     
-    @Id private int ID_Usuario;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_Usuario;
     private int tipousuario;
     private String Nom_usuario;
     private String Contraseña;

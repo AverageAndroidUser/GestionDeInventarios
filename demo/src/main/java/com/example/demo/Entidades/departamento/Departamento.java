@@ -1,12 +1,16 @@
 package com.example.demo.Entidades.departamento;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class Departamento {
 
-    @Id private int ID_Departamento;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_Departamento;
     private String Nombre;
 
     public Departamento(){

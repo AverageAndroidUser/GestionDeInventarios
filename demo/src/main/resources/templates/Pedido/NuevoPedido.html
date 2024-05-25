@@ -3,13 +3,11 @@
     <head>
         <meta charset="ISO-8859-1">
         <title>List Users</title>
-        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     </head>
     <body>
-        <form method="post" th:action="@{/Gestion_Inventarios/Pedido/Guardar/}" th:object="${Pedidoo}">
-            <input type="datetime-local" th:field="${Pedidoo.Fecha_salida}" required>
+        <form method="post" th:action="@{/Gestion_Inventarios/Pedido/Guardar}" th:object="${Pedidoo}">
+            <input type="datetime-local" th:field="${Pedidoo.Fecha_entrega}" required>
             <table>
                 <thead>
                     <tr>
@@ -21,7 +19,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr th:each="productos: ${Productoss}">
+                    <tr th:each="productos : ${Productoss}">
                         <td th:value="${productos.ID_Producto}" hidden id="ID_Producto"></td>
                         <td th:text="${productos.Nombre}"></td>
                         <td th:text="${productos.Descripcion}"></td>
@@ -29,17 +27,20 @@
                         <td th:text="${productos.Preciounitario}"></td>
                         <td th:text="${productos.proveedor.Nombre}"></td>
                         <td>
-                            <select id="CantidadDetalle" required>
-                                <option th:each="i : ${#numbers.sequence(0, productos.Cantidad)}" th:value="${i}" th:text="${i}"></option>
+                            <select class="CantidadDetalle" required>
+                                <option th:each="i : ${#numbers.sequence(1, productos.Cantidad)}" th:value="${i}" th:text="${i}"></option>
                             </select> 
                         </td>
-                        <td><a th:href="@{/Gestion_Inventarios/DetallePedido/{idProducto}/{cantidad}(idProducto=${productos.ID_Producto}, cantidad=${productos.Cantidad})}">
-                            <button type="button">AGREGAR</button>
-                        </a></td>
+                        <td>
+                            <button type="button" th:onclick="'agregarDetalle(' + ${productos.ID_Producto} + ', this)'" th:id="'botonAgregar_' + ${productos.ID_Producto}">AGREGAR</button>
+                            <button type="button" th:onclick="'eliminarDetalle(' + ${productos.ID_Producto} + ', this)'" th:id="'botonEliminar_' + ${productos.ID_Producto}" disabled>ELIMINAR</button>
+                        </td>                        
                     </tr>
                 </tbody>
             </table>
             <button type="submit">GUARDAR</button>
-        </form>
+        </form>        
         <a th:href="@{/Gestion_Inventarios/Productos/}"><button type="button">Atras</button></a>
-    </div>
+    </body>
+    <script th:src="@{/js/app.js}"></script>
+</html>

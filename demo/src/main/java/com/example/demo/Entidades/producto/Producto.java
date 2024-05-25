@@ -3,6 +3,8 @@ package com.example.demo.Entidades.producto;
 import com.example.demo.Entidades.usuario.Usuario;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -11,6 +13,7 @@ import jakarta.persistence.ManyToOne;
 public class Producto {
 
     @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int ID_Producto;
     private String Nombre;
     private String Descripcion;

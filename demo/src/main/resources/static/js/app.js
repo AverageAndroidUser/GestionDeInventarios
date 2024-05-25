@@ -44,12 +44,49 @@ function calculateTotal() {
   document.getElementById("Precio_total").value = precioTotal;
 }
 
-function cantidad(){
-  var cantidad = document.getElementById('CantidadDetalle').value;
-  var Id_Producto = document.getElementById('ID_Producto').value;
-  var url = '/Gestion_Inventarios/DetallePedido/' + encodeURIComponent(Id_Producto) + '/' + encodeURIComponent(cantidad);
-  window.location.href=url;
+function agregarDetalle(idProducto, button) {
+  var row = button.closest('tr');
+  var cantidad = row.querySelector('.CantidadDetalle').value;
+  
+  var cantidad2 = row.querySelector('.CantidadDetalle');
+  cantidad2.disabled = true;
+
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", '/Gestion_Inventarios/Pedido/DetallePedido/' + encodeURIComponent(idProducto) + '/' + encodeURIComponent(cantidad), true);
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState == 4 && xhr.status == 200) {
+          button.disabled = true;
+          button.textContent = "AGREGADO"
+
+          var botonEliminar = document.getElementById('botonEliminar_' + idProducto);
+          botonEliminar.disabled = false;
+      }
+  };
+  xhr.send();
 }
+
+function eliminarDetalle(idProducto, button) {
+  var xhr = new XMLHttpRequest();
+  xhr.open("GET", '/Gestion_Inventarios/Pedido/DetallePedido/Eliminar/' + encodeURIComponent(idProducto), true);
+  xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var botonAgregar = document.getElementById('botonAgregar_' + idProducto);
+        botonAgregar.disabled = false;
+        botonAgregar.textContent = "AGREGAR";
+
+        var botonEliminar = document.getElementById('botonEliminar_' + idProducto);
+        botonEliminar.disabled = true;
+
+        var row = button.closest('tr');
+        var cantidad2 = row.querySelector('.CantidadDetalle');
+        cantidad2.disabled = false;
+      }
+  };
+  xhr.send();
+}
+
+
+
 
 
 

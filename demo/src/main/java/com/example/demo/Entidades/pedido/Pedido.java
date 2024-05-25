@@ -1,14 +1,14 @@
 package com.example.demo.Entidades.pedido;
 
 import java.util.Date;
-import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.example.demo.Entidades.pedido.detalle_pedido.Detalle_pedido;
 import com.example.demo.Entidades.usuario.Usuario;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
@@ -16,7 +16,9 @@ import jakarta.persistence.ManyToOne;
 @Entity
 public class Pedido {
     
-    @Id private int ID_pedido;
+    @Id 
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int ID_pedido;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd'T'HH:mm")
     private Date Fecha_entrega;
@@ -28,8 +30,6 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "ID_Usuario")
     private Usuario usuario;
-
-    //private List<Detalle_pedido> detalle;
 
     public Pedido() {
         super();
@@ -82,13 +82,5 @@ public class Pedido {
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
-    /*public List<Detalle_pedido> getDetalle() {
-        return detalle;
-    }
-
-    public void setDetalle(List<Detalle_pedido> detalle) {
-        this.detalle = detalle;
-    }*/
     
 }
