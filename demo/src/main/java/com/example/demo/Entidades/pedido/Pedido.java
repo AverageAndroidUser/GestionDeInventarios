@@ -1,9 +1,11 @@
 package com.example.demo.Entidades.pedido;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.example.demo.Entidades.pedido.detalle_pedido.Detalle_pedido;
 import com.example.demo.Entidades.usuario.Usuario;
 
 import jakarta.persistence.Entity;
@@ -26,6 +28,8 @@ public class Pedido {
     @ManyToOne
     @JoinColumn(name = "ID_Usuario")
     private Usuario usuario;
+
+    //private List<Detalle_pedido> detalle;
 
     public Pedido() {
         super();
@@ -79,5 +83,12 @@ public class Pedido {
         this.usuario = usuario;
     }
 
+    /*public List<Detalle_pedido> getDetalle() {
+        return detalle;
+    }
+
+    public void setDetalle(List<Detalle_pedido> detalle) {
+        this.detalle = detalle;
+    }*/
     
 }

@@ -8,19 +8,10 @@
         <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
     </head>
     <body>
-    <div class="container text-center">
-        <div>
-            <form th:action="@{/logout}" method="post">
-                <input type="submit" value="Sign Out" />
-            </form>
-        </div>
-        <div>
-            <h1>List of Users</h1>
-        </div>
-        <!--CREAR BOTON QUE CREE UNA UN DETALLE PEDIDO Y LO AGREGUE A LA LISTA QUE ESTAMOS PASANDO-->
-        <div>
-            <table class="table table-striped table-bordered">
-                <thead class="thead-dark">
+        <form method="post" th:action="@{/Gestion_Inventarios/Pedido/Guardar/}" th:object="${Pedidoo}">
+            <input type="datetime-local" th:field="${Pedidoo.Fecha_salida}" required>
+            <table>
+                <thead>
                     <tr>
                         <th>Nombre Producto</th>
                         <th>Descripcion</th>
@@ -31,16 +22,24 @@
                 </thead>
                 <tbody>
                     <tr th:each="productos: ${Productoss}">
-                        <td th:text="${productos.Usuario.Nom_usuario}"></td>
+                        <td th:value="${productos.ID_Producto}" hidden id="ID_Producto"></td>
                         <td th:text="${productos.Nombre}"></td>
                         <td th:text="${productos.Descripcion}"></td>
                         <td th:text="${productos.Cantidad}"></td>
                         <td th:text="${productos.Preciounitario}"></td>
-                        <td><a th:text="${productos.proveedor.Nombre}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${productos.proveedor.ID_Usuario}"></a></td>
-                        <td><a th:href="@{/Gestion_Inventarios/Transaccion/} + ${productos.ID_Producto}"><button type="button">COMPRAR</button></a></td>
+                        <td th:text="${productos.proveedor.Nombre}"></td>
+                        <td>
+                            <select id="CantidadDetalle" required>
+                                <option th:each="i : ${#numbers.sequence(0, productos.Cantidad)}" th:value="${i}" th:text="${i}"></option>
+                            </select> 
+                        </td>
+                        <td><a th:href="@{/Gestion_Inventarios/DetallePedido/{idProducto}/{cantidad}(idProducto=${productos.ID_Producto}, cantidad=${productos.Cantidad})}">
+                            <button type="button">AGREGAR</button>
+                        </a></td>
                     </tr>
                 </tbody>
             </table>
-        </div> 
+            <button type="submit">GUARDAR</button>
+        </form>
         <a th:href="@{/Gestion_Inventarios/Productos/}"><button type="button">Atras</button></a>
     </div>

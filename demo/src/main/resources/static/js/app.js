@@ -44,5 +44,12 @@ function calculateTotal() {
   document.getElementById("Precio_total").value = precioTotal;
 }
 
+function cantidad(){
+  var cantidad = document.getElementById('CantidadDetalle').value;
+  var Id_Producto = document.getElementById('ID_Producto').value;
+  var url = '/Gestion_Inventarios/DetallePedido/' + encodeURIComponent(Id_Producto) + '/' + encodeURIComponent(cantidad);
+  window.location.href=url;
+}
+
 
 
