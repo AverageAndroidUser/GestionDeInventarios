@@ -32,6 +32,12 @@ public class PedidoControl {
 
     List<Detalle_pedido> lista = new ArrayList<>();
 
+    @GetMapping("/ListaPedido")
+    public String listaPedidos(Model model){
+        model.addAttribute("Detalless", repositorioDe.findByUsuario(usuarioLog.nombreUsuario()));
+        return "Pedido/ListaPedido";
+    }    
+
     @GetMapping("/")
     public String nuevoPedido(Model model) {
         lista.clear();

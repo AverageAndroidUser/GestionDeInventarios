@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="ISO-8859-1">
+        <title>List Users</title>
+        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
+        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
+        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+    <div class="container text-center">
+        <div>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Sign Out" />
+            </form>
+        </div>
+        <div>
+            <h1>List of Users</h1>
+        </div>
+        
+        <div>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>---------ID---------</th>
+                        <th>---------Nombre Producto---------</th>
+                        <th>---------Proveedor---------</th>
+                        <th>---------Cantidad Pedida---------</th>
+                        <th>---------Fecha_entrega---------</th>
+                        <th>---------Fecha_pedido---------</th>
+                        <th>---------Estado Pedido---------</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="detalle: ${Detalless}">
+                        <td th:text="${detalle.pedido.ID_pedido}"></td>
+                        <td><a th:text="${detalle.producto.Nombre}" th:href="@{/Gestion_Inventarios/Productos/VerProducto/} + ${detalle.producto.ID_Producto}"></a></td>
+                        <td><a th:text="${detalle.producto.proveedor.Nom_usuario}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${detalle.producto.proveedor.ID_Usuario}"></a></td>
+                        <td th:text="${detalle.Cantidad_total}"></td>
+                        <td th:text="${detalle.pedido.Fecha_entrega}"></td>
+                        <td th:text="${detalle.pedido.Fecha_salida}"></td>
+                        <td>
+                            <span th:if="${detalle.pedido.Estado == 1}" th:text="'EXITOSO'"></span>
+                            <span th:if="${detalle.pedido.Estado == 0}" th:text="'FALLIDO'"></span>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div> 
+        <a th:href="@{/Gestion_Inventarios/Productos/}"><button type="button">Atras</button></a>
+    </div>
+    </body>
+</html>
