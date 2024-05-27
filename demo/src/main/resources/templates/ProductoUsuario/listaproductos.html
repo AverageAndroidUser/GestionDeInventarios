@@ -52,5 +52,10 @@
         <a th:href="@{/Gestion_Inventarios/Pedido/}"><button type="button">Pedidos</button></a>
         <a th:href="@{/Gestion_Inventarios/Pedido/ListaPedido}"><button type="button">Historial Pedidos</button></a>
     </div>
+    <div th:object="${Productoss}">
+        <a th:if="${Productoss.hasPrevious()}" th:href="@{/Gestion_Inventarios/Productos/} + ${Productoss.number - 1}">Anterior</a>
+        <span>Page <span th:text="${Productoss.number + 1}"></span> of <span th:text="${Productoss.totalPages}"></span></span>
+        <a th:if="${Productoss.hasNext()}" th:href="@{/Gestion_Inventarios/Productos/} + ${Productoss.number + 1}">Siguiente</a>
+    </div>  
     </body>
 </html>

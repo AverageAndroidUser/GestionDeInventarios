@@ -45,7 +45,7 @@ public class WebSecurityConfig{
                 .failureUrl("/Gestion_Inventarios/error")
                 .usernameParameter("Nom_usuario")
                 .passwordParameter("Contraseña")
-                .defaultSuccessUrl("/Gestion_Inventarios/Productos/")
+                .defaultSuccessUrl("/Gestion_Inventarios/Productos/0")
                 .permitAll()
                 )
                 .logout(logout -> logout.logoutSuccessUrl("/Gestion_Inventarios/register").permitAll()
