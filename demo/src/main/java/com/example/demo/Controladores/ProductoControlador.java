@@ -56,13 +56,13 @@ public class ProductoControlador {
         }
         
         repositorio.save(producto);
-        return "redirect:/Gestion_Inventarios/Productos/";
+        return "redirect:/Gestion_Inventarios/Productos/0";
     }
 
     @GetMapping("BorrarProducto/{id}")
     public String borrarProducto(@PathVariable int id){
         repositorio.deleteById(id);
-        return "redirect:/Gestion_Inventarios/Productos/";
+        return "redirect:/Gestion_Inventarios/Productos/0";
     }
 
     @GetMapping("EditarProducto/{id}")
