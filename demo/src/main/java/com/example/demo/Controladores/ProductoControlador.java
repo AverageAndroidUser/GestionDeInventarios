@@ -1,5 +1,6 @@
 package com.example.demo.Controladores;
 
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.usuarioLog;
 import com.example.demo.Entidades.producto.Producto;
@@ -27,11 +29,17 @@ public class ProductoControlador {
 
     @GetMapping("/{pagina}")
     public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, Model model){
-        System.out.println("----> " + pagina);
         Pageable pageable = PageRequest.of(pagina, tamaño);
         Page<Producto> productos = repositorio.findByUsuario(usuarioLog.nombreUsuario(), pageable);
         model.addAttribute("Productoss", productos);
         return "ProductoUsuario/listaproductos";
+    }
+
+    @GetMapping("/Busqueda")
+    @ResponseBody
+    public List<Producto> buscarProducto(@RequestParam String nombre, Model model){
+        return repositorio.findByNombreAndUsuario(nombre, usuarioLog.nombreUsuario());
+        
     }
 
     @GetMapping("NuevoProducto/")

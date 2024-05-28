@@ -19,4 +19,7 @@ public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
 
     @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.tipousuario = ?1 AND p.Cantidad > ?2")
     List<Producto> findByCantidad(int tipo, int Cantidad);
+
+    @Query("SELECT p FROM Producto p WHERE p.Nombre LIKE %?1% AND p.usuario = ?2")
+    List<Producto> findByNombreAndUsuario(String nombre, Usuario usuario);
 }

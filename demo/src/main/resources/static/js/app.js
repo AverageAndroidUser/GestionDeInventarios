@@ -85,6 +85,36 @@ function eliminarDetalle(idProducto, button) {
   xhr.send();
 }
 
+function buscarProductos() {
+  var keyword = document.getElementById("barraBusqueda").value;
+  fetch(`/Gestion_Inventarios/Productos/Busqueda?nombre=` + keyword)
+      .then(response => response.json())
+      .then(data => {
+          console.log(data);  // Verifica la estructura del JSON devuelto
+          var table = document.getElementById("tablaProductos");
+          table.innerHTML = '';
+          data.forEach(product => {
+              table.innerHTML += `
+                  <tr>
+                      <td>${product.usuario.nom_usuario}</td>
+                      <td>${product.nombre}</td>
+                      <td>${product.descripcion}</td>
+                      <td>${product.cantidad}</td>
+                      <td>${product.preciounitario}</td>
+                      <td>${product.proveedor.nom_usuario}</td>
+                      <td><a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><button type="button">BORRAR</button></a></td>
+                      <td><a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><button type="button">EDITAR</button></a></td>
+                  </tr>
+              `;
+          });
+      });
+}
+
+function regresar() {
+  window.history.back();
+}
+
+
 
 
 

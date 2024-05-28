@@ -11,8 +11,9 @@
     <div class="container">
         <h1 class="mt-5">Error</h1>
         <p class="lead">Lo sentimos, ha ocurrido un error.</p>
-        <a th:href="@{/Gestion_Inventarios/Productos/}" class="btn btn-primary">Volver al inicio</a>
+        <button class="btn btn-primary"  type="button" onclick="regresar()">Volver al inicio</button>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script>
 </body>
+    <script th:src="@{/js/app.js}"></script>
 </html>
