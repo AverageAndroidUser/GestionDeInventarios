@@ -15,15 +15,24 @@ public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
 
     Page<Producto> findByUsuario(Usuario usuario, Pageable page);
 
-    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.ID_Usuario = ?1 AND p.Cantidad > 0")
+    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.ID_Usuario = ?1 AND p.cantidad > 0")
     List<Producto> findByUsuario2(int usuario);
 
-    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.tipousuario = ?1 AND p.Cantidad > ?2")
+    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.tipousuario = ?1 AND p.cantidad > ?2")
+    Page<Producto> findByCantidad(int tipo, int Cantidad, Pageable page);
+
+    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.tipousuario = ?1 AND p.cantidad > ?2")
     List<Producto> findByCantidad(int tipo, int Cantidad);
 
     @Query("SELECT p FROM Producto p WHERE p.Nombre LIKE %?1% AND p.usuario = ?2")
     List<Producto> findByNombreAndUsuario(String nombre, Usuario usuario);
 
+    @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE p.Nombre LIKE %?1% AND p.usuario.tipousuario = 2 AND p.cantidad > 0")
+    List<Producto> findByNombreAndUsuarioTi(String nombre);
+
     @Query("SELECT p FROM Producto p WHERE p.proveedor.Nom_usuario = ?1 AND p.usuario = ?2")
     List<Producto> findByProveedorAndUsuario(String proveedor, Usuario usuario);
+
+    @Query("SELECT p FROM Producto p WHERE p.proveedor.Nom_usuario = ?1 AND p.cantidad > 0")
+    List<Producto> findByProveedor(String proveedor);
 }

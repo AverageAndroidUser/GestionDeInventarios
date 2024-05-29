@@ -53,7 +53,7 @@ public class TransaccionControl {
         compra.setCantidad(compra.getCantidad() - nuebProducto.getCantidad());
         repositorioPo.save(compra);
         repositorioPo.save(nuebProducto);
-        return "redirect:/Gestion_Inventarios/Tienda/";
+        return "redirect:/Gestion_Inventarios/Tienda/0";
     }
 
     @GetMapping("/Lista")

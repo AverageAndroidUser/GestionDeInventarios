@@ -85,6 +85,11 @@ function eliminarDetalle(idProducto, button) {
   xhr.send();
 }
 
+
+function regresar() {
+  window.history.back();
+}
+
 function buscarProductos() {
   var keyword = document.getElementById("barraBusqueda").value;
   fetch(`/Gestion_Inventarios/Productos/Busqueda?nombre=` + keyword)
@@ -96,6 +101,7 @@ function buscarProductos() {
           data.forEach(product => {
               table.innerHTML += `
                   <tr>
+                      <td>${product.id_Producto}</td>
                       <td>${product.usuario.nom_usuario}</td>
                       <td>${product.nombre}</td>
                       <td>${product.descripcion}</td>
@@ -110,8 +116,27 @@ function buscarProductos() {
       });
 }
 
-function regresar() {
-  window.history.back();
+function buscarProductosPro() {
+  var keyword = document.getElementById("barraBusqueda").value;
+  fetch(`/Gestion_Inventarios/Tienda/Busqueda?nombre=` + keyword)
+      .then(response => response.json())
+      .then(data => {
+          var table = document.getElementById("tablaProductos");
+          table.innerHTML = '';
+          data.forEach(product => {
+              table.innerHTML += `
+              <tr>
+                  <td>${product.id_Producto}</td>
+                  <td>${product.nombre}</td>
+                  <td>${product.descripcion}</td>
+                  <td>${product.cantidad}</td>
+                  <td>${product.preciounitario}</td>
+                  <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.proveedor.nom_usuario}</a></td>
+                  <td><a href="/Gestion_Inventarios/Transaccion/${product.id_Producto}"><button type="button">COMPRAR</button></a></td>
+              </tr>
+              `;
+          });
+      });
 }
 
 function filterProducts() {
@@ -124,6 +149,7 @@ function filterProducts() {
           data.forEach(product => {
               table.innerHTML += `
                   <tr>
+                      <td>${product.id_Producto}</td>
                       <td>${product.usuario.nom_usuario}</td>
                       <td>${product.nombre}</td>
                       <td>${product.descripcion}</td>
@@ -132,6 +158,29 @@ function filterProducts() {
                       <td>${product.proveedor.nom_usuario}</td>
                       <td><a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><button type="button">BORRAR</button></a></td>
                       <td><a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><button type="button">EDITAR</button></a></td>
+                  </tr>
+              `;
+          });
+      });
+}
+
+function filterProductsPro() {
+  var proveedor = document.getElementById("filtro").value;
+  fetch(`/Gestion_Inventarios/Tienda/filtro?proveedor=` + proveedor)
+      .then(response => response.json())
+      .then(data => {
+          var table = document.getElementById("tablaProductos");
+          table.innerHTML = '';
+          data.forEach(product => {
+              table.innerHTML += `
+                  <tr>
+                      <td>${product.id_Producto}</td>
+                      <td>${product.nombre}</td>
+                      <td>${product.descripcion}</td>
+                      <td>${product.cantidad}</td>
+                      <td>${product.preciounitario}</td>
+                      <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.proveedor.nom_usuario}</a></td>
+                      <td><a href="/Gestion_Inventarios/Transaccion/${product.id_Producto}"><button type="button">COMPRAR</button></a></td>
                   </tr>
               `;
           });

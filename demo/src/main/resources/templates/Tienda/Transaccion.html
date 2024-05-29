@@ -37,8 +37,8 @@
                     <tr>
                         <td th:text="${Transaccionn.producto.Nombre}"></td>
                         <td th:text="${Transaccionn.producto.Descripcion}"></td>
-                        <td th:text="${Transaccionn.producto.Cantidad}"></td>
-                        <td th:text="${Transaccionn.producto.Preciounitario}" id="Preciounitario"></td>
+                        <td th:text="${Transaccionn.producto.cantidad}"></td>
+                        <td th:text="${Transaccionn.producto.preciounitario}" id="Preciounitario"></td>
                         <td th:text="${Transaccionn.producto.proveedor.Nombre}"></td>
                         <td>
                             <select th:field="${Transaccionn.Cantidad_total}" id="Cantidad_total" onchange="calculateTotal()" required>

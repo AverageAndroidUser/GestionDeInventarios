@@ -11,8 +11,8 @@
         <form method="post" th:action="@{/Gestion_Inventarios/Productos/GuardarProducto/}" th:object="${Productoss}">
             <input type="text" placeholder="Nombre Producto" th:field="${Productoss.Nombre}" required>
             <input type="text" placeholder="Descripcion" th:field="${Productoss.Descripcion}">
-            <input type="number" placeholder="Cantidad" min="1" th:field="${Productoss.Cantidad}" required>
-            <input type="number" placeholder="Precio Unitario" min="1" th:field="${Productoss.Preciounitario}" required>
+            <input type="number" placeholder="Cantidad" min="1" th:field="${Productoss.cantidad}" required>
+            <input type="number" placeholder="Precio Unitario" min="1" th:field="${Productoss.preciounitario}" required>
             <button type="submit">GUARDAR</button>
         </form>
         <button type="button" onclick="regresar()">Atras</button>

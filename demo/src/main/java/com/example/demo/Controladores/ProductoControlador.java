@@ -29,22 +29,9 @@ public class ProductoControlador {
     @Autowired ProductoRepositorio repositorio;
     @Autowired UsuarioRepositorio repositorioUs;
     @Autowired usuarioLog usuarioLog;
-
-    /*@GetMapping("/{pagina}")
-    public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, Model model){
-        Pageable pageable = PageRequest.of(pagina, tamaño);
-        Page<Producto> productos = repositorio.findByUsuario(usuarioLog.nombreUsuario(), pageable);
-        /*List<Usuario> usuarios = repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario());
-        usuarios.forEach(pro ->{
-            System.out.println(pro.getNom_usuario());
-        });
-        model.addAttribute("Proveedoress", repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario()));
-        model.addAttribute("Productoss", productos);
-        return "ProductoUsuario/listaproductos";
-    }*/
     
     @GetMapping("/{pagina}")
-    public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, @RequestParam(defaultValue = "nombre") String orden, @RequestParam(defaultValue = "asc") String direccion, Model model){
+    public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, @RequestParam(defaultValue = "cantidad") String orden, @RequestParam(defaultValue = "asc") String direccion, Model model){
         Sort sort = Sort.by(direccion.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, orden);
         Pageable pageable = PageRequest.of(pagina, tamaño, sort);
         Page<Producto> productos = repositorio.findByUsuario(usuarioLog.nombreUsuario(), pageable);
@@ -54,6 +41,8 @@ public class ProductoControlador {
         });*/
         model.addAttribute("Proveedoress", repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario()));
         model.addAttribute("Productoss", productos);
+        model.addAttribute("orden", orden);
+        model.addAttribute("direccion", direccion);
         return "ProductoUsuario/listaproductos";
     }
 

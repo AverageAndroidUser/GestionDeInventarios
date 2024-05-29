@@ -26,22 +26,24 @@
             <table class="table table-striped table-bordered">
                 <thead class="thead-dark">
                     <tr>
+                        <th>ID</th>
                         <th>Ususario</th>
                         <th>Nombre Producto</th>
                         <th>Descripcion</th>
-                        <th>Cantidad</th>
-                        <th>PrecioUnitario</th>
+                        <th><a th:href="@{/Gestion_Inventarios/Productos/0(pagina=0, orden='cantidad', direccion=${direccion == 'asc' ? 'desc' : 'asc'})}">Cantidad</a></th>
+                        <th><a th:href="@{/Gestion_Inventarios/Productos/0(pagina=0, orden='preciounitario', direccion=${direccion == 'asc' ? 'desc' : 'asc'})}">Precio Unitario</a></th>
                         <th>Proveedor</th>
                     </tr>
                 </thead>
                 <tbody id="tablaProductos">
                     <tr  th:each="productos: ${Productoss}">
-                        <td th:text="${productos.usuario.Nom_usuario}">5</td>
-                        <td th:text="${productos.Nombre}">1</td>
-                        <td th:text="${productos.Descripcion}">2</td>
-                        <td th:text="${productos.Cantidad}">3</td>
-                        <td th:text="${productos.Preciounitario}">4</td>
-                        <td th:text="${productos.proveedor.Nom_usuario}">5</td>
+                        <td th:text="${productos.ID_Producto}"></td>
+                        <td th:text="${productos.usuario.Nom_usuario}"></td>
+                        <td th:text="${productos.Nombre}"></td>
+                        <td th:text="${productos.Descripcion}"></td>
+                        <td th:text="${productos.cantidad}"></td>
+                        <td th:text="${productos.preciounitario}"></td>
+                        <td th:text="${productos.proveedor.Nom_usuario}"></td>
                         <td><a th:href="@{/Gestion_Inventarios/Productos/BorrarProducto/} + ${productos.ID_Producto}"><button type="button">BORRAR</button></a></td>
                         <td><a th:href="@{/Gestion_Inventarios/Productos/EditarProducto/} + ${productos.ID_Producto}"><button type="button">EDITAR</button></a></td>
                     </tr>
@@ -50,7 +52,7 @@
         </div> 
         <a th:href="@{/Gestion_Inventarios/Usuario/}"><button type="button">VerUsuario</button></a>
         <a th:href="@{/Gestion_Inventarios/Productos/NuevoProducto/}"><button type="button">NuevoProducto</button></a>
-        <a th:href="@{/Gestion_Inventarios/Tienda/}"><button type="button">Tienda</button></a>
+        <a th:href="@{/Gestion_Inventarios/Tienda/0}"><button type="button">Tienda</button></a>
         <a th:href="@{/Gestion_Inventarios/Transaccion/Lista}"><button type="button">Historial Transacciones</button></a>
         <a th:href="@{/Gestion_Inventarios/Pedido/}"><button type="button">Pedidos</button></a>
         <a th:href="@{/Gestion_Inventarios/Pedido/ListaPedido}"><button type="button">Historial Pedidos</button></a>

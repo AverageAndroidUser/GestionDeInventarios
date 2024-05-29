@@ -94,6 +94,6 @@ public class PedidoControl {
             System.out.println("NO SIRVIO...");
         }
         lista.clear();
-        return "redirect:/Gestion_Inventarios/Productos/";
+        return "redirect:/Gestion_Inventarios/Productos/0";
     }
 }

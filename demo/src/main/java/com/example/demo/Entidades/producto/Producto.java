@@ -17,8 +17,8 @@ public class Producto {
     private int ID_Producto;
     private String Nombre;
     private String Descripcion;
-    private int Cantidad;
-    private int Preciounitario;
+    private int cantidad;
+    private int preciounitario;
 
     @ManyToOne
     @JoinColumn(name = "ID_Usuario")
@@ -37,8 +37,8 @@ public class Producto {
         ID_Producto = iD_Producto;
         Nombre = nombre;
         Descripcion = descripcion;
-        this.Cantidad = cantidad;
-        Preciounitario = precioUnitario;
+        this.cantidad = cantidad;
+        this.preciounitario = precioUnitario;
         this.usuario = usuario;
         this.proveedor = proveedor;
     }
@@ -49,8 +49,8 @@ public class Producto {
             Usuario proveedor) {
         Nombre = nombre;
         Descripcion = descripcion;
-        Cantidad = cantidad;
-        Preciounitario = preciounitario;
+        this.cantidad = cantidad;
+        this.preciounitario = preciounitario;
         this.usuario = usuario;
         this.proveedor = proveedor;
     }
@@ -80,19 +80,19 @@ public class Producto {
     }
 
     public int getCantidad() {
-        return Cantidad;
+        return cantidad;
     }
 
     public void setCantidad(int cantidad) {
-        this.Cantidad = cantidad;
+        this.cantidad = cantidad;
     }
 
     public int getPreciounitario() {
-        return Preciounitario;
+        return preciounitario;
     }
 
     public void setPreciounitario(int precioUnitario) {
-        Preciounitario = precioUnitario;
+        preciounitario = precioUnitario;
     }
 
     public Usuario getUsuario() {

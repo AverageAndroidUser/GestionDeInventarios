@@ -12,8 +12,8 @@
             <input type="hidden" th:field="${Productoss.ID_Producto}">
             <input type="text" th:field="${Productoss.Nombre}" required>
             <input type="text" th:field="${Productoss.Descripcion}">
-            <input type="number" min="0" th:field="${Productoss.Cantidad}" required>
-            <input type="number" min="1" th:field="${Productoss.Preciounitario}" required>
+            <input type="number" min="0" th:field="${Productoss.cantidad}" required>
+            <input type="number" min="1" th:field="${Productoss.preciounitario}" required>
             <input type="hidden" th:field="${Productoss.usuario}" th:value="${Productoss.usuario}">
             <input type="hidden" th:field="${Productoss.proveedor}" th:value="${Productoss.usuario}">
             <button type="submit">GUARDAR</button>
