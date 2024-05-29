@@ -3,12 +3,17 @@ package com.example.demo.Controladores;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.demo.usuarioLog;
 import com.example.demo.Entidades.producto.Producto;
@@ -16,6 +21,7 @@ import com.example.demo.Entidades.producto.ProductoRepositorio;
 import com.example.demo.Entidades.transaccion.Transaccion;
 import com.example.demo.Entidades.transaccion.TransaccionRepositorio;
 import com.example.demo.Entidades.usuario.Usuario;
+import com.example.demo.Entidades.usuario.UsuarioRepositorio;
 
 @Controller
 @RequestMapping("/Gestion_Inventarios/Transaccion")
@@ -23,6 +29,7 @@ public class TransaccionControl {
 
     @Autowired TransaccionRepositorio repositorio;
     @Autowired ProductoRepositorio repositorioPo;
+    @Autowired UsuarioRepositorio repositorioUs;
     @Autowired usuarioLog usuarioLog;
 
     @GetMapping("/{id}")
@@ -56,18 +63,27 @@ public class TransaccionControl {
         return "redirect:/Gestion_Inventarios/Tienda/0";
     }
 
-    @GetMapping("/Lista")
-    public String listaTransaccion(Model model){
+    @GetMapping("/Lista/{pagina}")
+    public String listaTransaccion(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, Model model){
+        //Sort sort = Sort.by(direccion.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, orden);
+        Pageable pageable = PageRequest.of(pagina, tamaño);
 
         Usuario usuario = usuarioLog.nombreUsuario();
+        Page<Transaccion> transaccion;
 
         if(usuario.getTipousuario() == 2){
-            model.addAttribute("Transaccionn", repositorio.findByProveedor(usuario.getID_Usuario(), 0));
+            transaccion = repositorio.findByProveedor(usuario, pageable);
+            model.addAttribute("Transaccionn", transaccion);
+            model.addAttribute("Proveedoress", repositorioUs.findAllProveedorTra(usuarioLog.nombreUsuario()));
+            model.addAttribute("Usuarioss", repositorioUs.findAllUsuarioTra(usuarioLog.nombreUsuario()));
         }else if (usuario.getTipousuario() == 1) {
-            model.addAttribute("Transaccionn", repositorio.findByUsuario(usuario.getID_Usuario(), 1));
+            transaccion = repositorio.findByUsuario(usuario, 1, pageable);
+            model.addAttribute("Transaccionn", transaccion);
+            model.addAttribute("Proveedoress", repositorioUs.findAllProveedorTra(usuarioLog.nombreUsuario()));
         }
+        model.addAttribute("Usuarioo", usuario);
+        //model.addAttribute("orden", orden);
+        //model.addAttribute("direccion", direccion);
         return "Tienda/ListTransaccion";
     }
-
-    
 }

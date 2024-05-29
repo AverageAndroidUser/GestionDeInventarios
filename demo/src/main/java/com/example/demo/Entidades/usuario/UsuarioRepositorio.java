@@ -17,5 +17,11 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer>{
 
     @Query("SELECT pro FROM Producto p JOIN p.proveedor pro WHERE p.cantidad > 0 AND pro.tipousuario = 2 GROUP BY pro")
     List<Usuario>findAllProveedor();
+
+    @Query("SELECT pro FROM Transaccion t JOIN t.producto p JOIN p.proveedor pro WHERE t.usuario = ?1 GROUP BY pro")
+    List<Usuario> findAllProveedorTra(Usuario usuario);
+
+    @Query("SELECT t.usuario FROM Transaccion t JOIN t.producto p WHERE p.proveedor = ?1 GROUP BY t.usuario")
+    List<Usuario> findAllUsuarioTra(Usuario usuario);
 }
 
