@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.demo.usuarioLog;
 import com.example.demo.Entidades.producto.Producto;
 import com.example.demo.Entidades.producto.ProductoRepositorio;
+import com.example.demo.Entidades.usuario.UsuarioRepositorio;
 
 import org.springframework.ui.Model;
 
@@ -25,12 +27,32 @@ import org.springframework.ui.Model;
 public class ProductoControlador {
     
     @Autowired ProductoRepositorio repositorio;
+    @Autowired UsuarioRepositorio repositorioUs;
     @Autowired usuarioLog usuarioLog;
 
-    @GetMapping("/{pagina}")
+    /*@GetMapping("/{pagina}")
     public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, Model model){
         Pageable pageable = PageRequest.of(pagina, tamaño);
         Page<Producto> productos = repositorio.findByUsuario(usuarioLog.nombreUsuario(), pageable);
+        /*List<Usuario> usuarios = repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario());
+        usuarios.forEach(pro ->{
+            System.out.println(pro.getNom_usuario());
+        });
+        model.addAttribute("Proveedoress", repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario()));
+        model.addAttribute("Productoss", productos);
+        return "ProductoUsuario/listaproductos";
+    }*/
+    
+    @GetMapping("/{pagina}")
+    public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, @RequestParam(defaultValue = "nombre") String orden, @RequestParam(defaultValue = "asc") String direccion, Model model){
+        Sort sort = Sort.by(direccion.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, orden);
+        Pageable pageable = PageRequest.of(pagina, tamaño, sort);
+        Page<Producto> productos = repositorio.findByUsuario(usuarioLog.nombreUsuario(), pageable);
+        /*List<Usuario> usuarios = repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario());
+        usuarios.forEach(pro ->{
+            System.out.println(pro.getNom_usuario());
+        });*/
+        model.addAttribute("Proveedoress", repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario()));
         model.addAttribute("Productoss", productos);
         return "ProductoUsuario/listaproductos";
     }
@@ -40,6 +62,17 @@ public class ProductoControlador {
     public List<Producto> buscarProducto(@RequestParam String nombre, Model model){
         return repositorio.findByNombreAndUsuario(nombre, usuarioLog.nombreUsuario());
         
+    }
+
+    @GetMapping("/filtro")
+    @ResponseBody
+    public List<Producto> fitraProductos(@RequestParam String proveedor, Model model){
+        System.out.println(proveedor);
+        if (proveedor.isEmpty()) {
+            return repositorio.findByUsuario2(usuarioLog.nombreUsuario().getID_Usuario());
+        }else{
+            return repositorio.findByProveedorAndUsuario(proveedor, usuarioLog.nombreUsuario());
+        }
     }
 
     @GetMapping("NuevoProducto/")

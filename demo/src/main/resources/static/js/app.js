@@ -114,6 +114,30 @@ function regresar() {
   window.history.back();
 }
 
+function filterProducts() {
+  var proveedor = document.getElementById("filtro").value;
+  fetch(`/Gestion_Inventarios/Productos/filtro?proveedor=` + proveedor)
+      .then(response => response.json())
+      .then(data => {
+          var table = document.getElementById("tablaProductos");
+          table.innerHTML = '';
+          data.forEach(product => {
+              table.innerHTML += `
+                  <tr>
+                      <td>${product.usuario.nom_usuario}</td>
+                      <td>${product.nombre}</td>
+                      <td>${product.descripcion}</td>
+                      <td>${product.cantidad}</td>
+                      <td>${product.preciounitario}</td>
+                      <td>${product.proveedor.nom_usuario}</td>
+                      <td><a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><button type="button">BORRAR</button></a></td>
+                      <td><a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><button type="button">EDITAR</button></a></td>
+                  </tr>
+              `;
+          });
+      });
+}
+
 
 
 

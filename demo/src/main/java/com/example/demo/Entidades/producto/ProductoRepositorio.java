@@ -12,6 +12,7 @@ import com.example.demo.Entidades.usuario.Usuario;
 
 @Repository
 public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
+
     Page<Producto> findByUsuario(Usuario usuario, Pageable page);
 
     @Query("SELECT p FROM Producto p JOIN p.usuario u WHERE u.ID_Usuario = ?1 AND p.Cantidad > 0")
@@ -22,4 +23,7 @@ public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
 
     @Query("SELECT p FROM Producto p WHERE p.Nombre LIKE %?1% AND p.usuario = ?2")
     List<Producto> findByNombreAndUsuario(String nombre, Usuario usuario);
+
+    @Query("SELECT p FROM Producto p WHERE p.proveedor.Nom_usuario = ?1 AND p.usuario = ?2")
+    List<Producto> findByProveedorAndUsuario(String proveedor, Usuario usuario);
 }
