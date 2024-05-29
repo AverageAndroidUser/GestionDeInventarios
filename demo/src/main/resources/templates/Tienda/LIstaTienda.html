@@ -41,7 +41,7 @@
                         <td th:text="${productos.Descripcion}"></td>
                         <td th:text="${productos.cantidad}"></td>
                         <td th:text="${productos.preciounitario}"></td>
-                        <td><a th:text="${productos.proveedor.Nom_usuario}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${productos.proveedor.ID_Usuario}"></a></td>
+                        <td><a th:text="${productos.usuario.Nom_usuario}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${productos.proveedor.ID_Usuario}"></a></td>
                         <td><a th:href="@{/Gestion_Inventarios/Transaccion/} + ${productos.ID_Producto}"><button type="button">COMPRAR</button></a></td>
                     </tr>
                 </tbody>

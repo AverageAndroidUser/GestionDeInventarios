@@ -33,6 +33,6 @@ public interface ProductoRepositorio extends JpaRepository<Producto, Integer>{
     @Query("SELECT p FROM Producto p WHERE p.proveedor.Nom_usuario = ?1 AND p.usuario = ?2")
     List<Producto> findByProveedorAndUsuario(String proveedor, Usuario usuario);
 
-    @Query("SELECT p FROM Producto p WHERE p.proveedor.Nom_usuario = ?1 AND p.cantidad > 0")
+    @Query("SELECT p FROM Producto p WHERE p.usuario.Nom_usuario = ?1 AND p.cantidad > 0")
     List<Producto> findByProveedor(String proveedor);
 }

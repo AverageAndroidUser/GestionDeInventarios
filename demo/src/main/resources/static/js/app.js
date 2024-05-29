@@ -131,7 +131,7 @@ function buscarProductosPro() {
                   <td>${product.descripcion}</td>
                   <td>${product.cantidad}</td>
                   <td>${product.preciounitario}</td>
-                  <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.proveedor.nom_usuario}</a></td>
+                  <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.usuario.nom_usuario}</a></td>
                   <td><a href="/Gestion_Inventarios/Transaccion/${product.id_Producto}"><button type="button">COMPRAR</button></a></td>
               </tr>
               `;
@@ -179,7 +179,7 @@ function filterProductsPro() {
                       <td>${product.descripcion}</td>
                       <td>${product.cantidad}</td>
                       <td>${product.preciounitario}</td>
-                      <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.proveedor.nom_usuario}</a></td>
+                      <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.usuario.nom_usuario}</a></td>
                       <td><a href="/Gestion_Inventarios/Transaccion/${product.id_Producto}"><button type="button">COMPRAR</button></a></td>
                   </tr>
               `;
