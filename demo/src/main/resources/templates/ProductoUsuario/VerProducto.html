@@ -31,6 +31,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <!--<a th:href="@{/Gestion_Inventarios/Transaccion/} + ${productos.ID_Producto}"><button type="button">COMPRAR</button></a>-->
                     <tr th:object="${Procuctoss}">
                         <td th:text="${Procuctoss.Usuario.Nom_usuario}"></td>
                         <td th:text="${Procuctoss.Nombre}"></td>

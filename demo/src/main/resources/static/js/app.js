@@ -106,7 +106,6 @@ function buscarProductos() {
                           <a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><img src="/img/delete.png" height="25px" width="25px"></a>
                       </td>
                       <td>${product.id_Producto}</td>
-                      <td>${product.usuario.nom_usuario}</td>
                       <td>${product.nombre}</td>
                       <td>${product.descripcion}</td>
                       <td>${product.cantidad}</td>
@@ -123,19 +122,20 @@ function buscarProductosPro() {
   fetch(`/Gestion_Inventarios/Tienda/Busqueda?nombre=` + keyword)
       .then(response => response.json())
       .then(data => {
-          var table = document.getElementById("tablaProductos");
+          var table = document.getElementById("cardContainer");
           table.innerHTML = '';
           data.forEach(product => {
               table.innerHTML += `
-              <tr>
-                  <td>${product.id_Producto}</td>
-                  <td>${product.nombre}</td>
-                  <td>${product.descripcion}</td>
-                  <td>${product.cantidad}</td>
-                  <td>${product.preciounitario}</td>
-                  <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.usuario.nom_usuario}</a></td>
-                  <td><a href="/Gestion_Inventarios/Transaccion/${product.id_Producto}"><button type="button">COMPRAR</button></a></td>
-              </tr>
+              <div class="col-md-3 mb-3">
+                      <div class="card mb-4">
+                          <img src="/img/disabled.png" class="card-img-top" alt="Imagen del Producto">
+                          <div class="card-body">
+                              <h5 class="card-title">${product.nombre}</h5>
+                              <p class="card-text"><strong>Precio: </strong>$${product.preciounitario}</p>
+                              <a href="/Gestion_Inventarios/Productos/VerProducto/${product.id_Producto}" class="btn btn-primary">Ver Producto</a>
+                          </div>
+                      </div>
+                  </div>
               `;
           });
       });
@@ -156,7 +156,6 @@ function filterProducts() {
                           <a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><img src="/img/delete.png" height="25px" width="25px"></a>
                       </td>
                       <td>${product.id_Producto}</td>
-                      <td>${product.usuario.nom_usuario}</td>
                       <td>${product.nombre}</td>
                       <td>${product.descripcion}</td>
                       <td>${product.cantidad}</td>
@@ -173,23 +172,25 @@ function filterProductsPro() {
   fetch(`/Gestion_Inventarios/Tienda/filtro?proveedor=` + proveedor)
       .then(response => response.json())
       .then(data => {
-          var table = document.getElementById("tablaProductos");
-          table.innerHTML = '';
+          var cardContainer = document.getElementById("cardContainer");
+          cardContainer.innerHTML = '';
           data.forEach(product => {
-              table.innerHTML += `
-                  <tr>
-                      <td>${product.id_Producto}</td>
-                      <td>${product.nombre}</td>
-                      <td>${product.descripcion}</td>
-                      <td>${product.cantidad}</td>
-                      <td>${product.preciounitario}</td>
-                      <td><a href="/Gestion_Inventarios/Usuario/Proveedor/${product.proveedor.id_Usuario}">${product.usuario.nom_usuario}</a></td>
-                      <td><a href="/Gestion_Inventarios/Transaccion/${product.id_Producto}"><button type="button">COMPRAR</button></a></td>
-                  </tr>
+              cardContainer.innerHTML += `
+                  <div class="col-md-3 mb-3">
+                      <div class="card mb-4">
+                          <img src="/img/disabled.png" class="card-img-top" alt="Imagen del Producto">
+                          <div class="card-body">
+                              <h5 class="card-title">${product.nombre}</h5>
+                              <p class="card-text"><strong>Precio: </strong>$${product.preciounitario}</p>
+                              <a href="/Gestion_Inventarios/Productos/VerProducto/${product.id_Producto}" class="btn btn-primary">Ver Producto</a>
+                          </div>
+                      </div>
+                  </div>
               `;
           });
       });
 }
+
 
 
 

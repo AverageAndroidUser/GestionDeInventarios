@@ -20,7 +20,7 @@
             background-color: #23272b;
             color: white;
             width: 100%;
-            border-top: 3px solid #343a40;
+            border-top: 1px solid #343a40;
             padding: 0rem 20rem;
         }
 
@@ -41,9 +41,12 @@
             transform: translateX(-50%);
         }
 
-        h1{
-            font-size: 40px;
-        }
+        h2{
+                font-size: 30px;
+                font-weight: bold;
+                padding-top: 10px;
+                text-align: center;
+            }
     </style>
 </head>
 
@@ -52,7 +55,7 @@
     <nav class="navbar navbar-expand-lg navbar-custom">
         <div class="navbar-center">
             <span class="navbar-text">
-                GESTIÓN INVENTARIOS
+                <a style="text-decoration: none; color: #23272b;" th:href="@{/Gestion_Inventarios/Productos/0}">GESTIÓN INVENTARIOS</a>
             </span>
         </div>
         <div class="collapse navbar-collapse justify-content-end">

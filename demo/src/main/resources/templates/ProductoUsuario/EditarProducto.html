@@ -2,24 +2,58 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="ISO-8859-1">
-        <title>List Users</title>
-        <link rel="stylesheet" type="text/css" href="/webjars/bootstrap/css/bootstrap.min.css" />
-        <script type="text/javascript" src="/webjars/jquery/jquery.min.js"></script>
-        <script type="text/javascript" src="/webjars/bootstrap/js/bootstrap.min.js"></script>
+        <title>Editar Producto</title>
+        <style>
+            .form-container {
+                max-width: 700px !important;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #dee2e6;
+                border-radius: 5px;
+                background-color: #e5e5e5;
+            }
+            .btn-group {
+                display: flex;
+                justify-content: space-between;
+            }
+            .btn-group .btn {
+                flex: 1;
+            }
+            label{
+                font-weight: 600;
+            }
+        </style>
     </head>
+    <header th:replace = "~{barra}"></header>
     <body>
-        <form method="post" th:action="@{/Gestion_Inventarios/Productos/GuardarProducto/}" th:object="${Productoss}">
-            <input type="hidden" th:field="${Productoss.ID_Producto}">
-            <input type="text" th:field="${Productoss.Nombre}" required>
-            <input type="text" th:field="${Productoss.Descripcion}">
-            <input type="number" min="0" th:field="${Productoss.cantidad}" required>
-            <input type="number" min="1" th:field="${Productoss.preciounitario}" required>
-            <input type="hidden" th:field="${Productoss.usuario}" th:value="${Productoss.usuario}">
-            <input type="hidden" th:field="${Productoss.proveedor}" th:value="${Productoss.usuario}">
-            <button type="submit">GUARDAR</button>
-        </form>
-        <button type="button" onclick="regresar()">Atras</button>
-    </div>
+        <div style="padding-top: 10px; text-align: center;">
+            <h2>Editar Producto</h2>
+        </div>
+        <div class="container form-container">
+            <form method="post" th:action="@{/Gestion_Inventarios/Productos/GuardarProducto/}" th:object="${Productoss}">
+                <div class="form-group">
+                    <label for="nombreProducto">Nombre Producto</label>
+                    <input type="text" class="form-control form-control-sm" id="nombreProducto" placeholder="Nombre Producto" th:field="${Productoss.Nombre}" required>
+                </div>
+                <div class="form-group">
+                    <label for="descripcionProducto">Descripción</label>
+                    <textarea style="max-height: 150px; min-height: 30px;"  class="form-control form-control-sm" id="descripcionProducto" placeholder="Descripción" th:field="${Productoss.Descripcion}" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="cantidadProducto">Cantidad</label>
+                    <input type="number" class="form-control form-control-sm" id="cantidadProducto" placeholder="Cantidad" min="1" th:field="${Productoss.cantidad}" required>
+                </div>
+                <div class="form-group">
+                    <label for="precioUnitarioProducto">Precio Unitario</label>
+                    <input type="number" class="form-control form-control-sm" id="precioUnitarioProducto" placeholder="Precio Unitario" min="1" th:field="${Productoss.preciounitario}" required>
+                </div>
+                <div class="btn-group">
+                    <button type="submit" class="btn btn-primary btn-sm">Guardar</button>
+                    <button type="button" class="btn btn-secondary btn-sm" onclick="regresar()" style="margin-left: 10px;">Atrás</button>
+                </div>
+            </form>
+        </div>
+    
     </body>
     <script th:src="@{/js/app.js}"></script>
 </html>
