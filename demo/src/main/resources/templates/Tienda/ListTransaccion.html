@@ -23,12 +23,10 @@
                 <select th:if="${Usuarioo.tipousuario == 2}" name="usuarioId">
                     <option th:each="usuario : ${Usuarioss}" th:value="${usuario.ID_Usuario}" th:text="${usuario.Nom_usuario}"></option>
                 </select>
-
                 <label>Filtrar por Proveedor:</label>
                 <select name="proveedorId">
                     <option th:each="proveedor : ${Proveedoress}" th:value="${proveedor.ID_Usuario}" th:text="${proveedor.Nom_usuario}"></option>
                 </select>
-
                 <button type="submit">Filtrar</button>
             </form>
         </div>

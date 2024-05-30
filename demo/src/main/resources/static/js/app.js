@@ -101,6 +101,10 @@ function buscarProductos() {
           data.forEach(product => {
               table.innerHTML += `
                   <tr>
+                      <td>
+                          <a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><img src="/img/edit.png" height="25px" width="25px"></a>
+                          <a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><img src="/img/delete.png" height="25px" width="25px"></a>
+                      </td>
                       <td>${product.id_Producto}</td>
                       <td>${product.usuario.nom_usuario}</td>
                       <td>${product.nombre}</td>
@@ -108,8 +112,6 @@ function buscarProductos() {
                       <td>${product.cantidad}</td>
                       <td>${product.preciounitario}</td>
                       <td>${product.proveedor.nom_usuario}</td>
-                      <td><a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><button type="button">BORRAR</button></a></td>
-                      <td><a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><button type="button">EDITAR</button></a></td>
                   </tr>
               `;
           });
@@ -149,6 +151,10 @@ function filterProducts() {
           data.forEach(product => {
               table.innerHTML += `
                   <tr>
+                      <td>
+                          <a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><img src="/img/edit.png" height="25px" width="25px"></a>
+                          <a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><img src="/img/delete.png" height="25px" width="25px"></a>
+                      </td>
                       <td>${product.id_Producto}</td>
                       <td>${product.usuario.nom_usuario}</td>
                       <td>${product.nombre}</td>
@@ -156,8 +162,6 @@ function filterProducts() {
                       <td>${product.cantidad}</td>
                       <td>${product.preciounitario}</td>
                       <td>${product.proveedor.nom_usuario}</td>
-                      <td><a href="/Gestion_Inventarios/Productos/BorrarProducto/${product.id_Producto}"><button type="button">BORRAR</button></a></td>
-                      <td><a href="/Gestion_Inventarios/Productos/EditarProducto/${product.id_Producto}"><button type="button">EDITAR</button></a></td>
                   </tr>
               `;
           });
@@ -186,7 +190,6 @@ function filterProductsPro() {
           });
       });
 }
-
 
 
 
