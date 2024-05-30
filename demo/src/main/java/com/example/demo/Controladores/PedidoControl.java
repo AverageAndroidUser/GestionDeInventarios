@@ -43,18 +43,6 @@ public class PedidoControl {
         model.addAttribute("Detalless", detalles);
         return "Pedido/ListaPedido";
     }  
-    
-    /*@GetMapping("/{pagina}")
-    public String lsitaProductos(@PathVariable("pagina") int pagina, @RequestParam(defaultValue = "10") int tamaño, @RequestParam(defaultValue = "cantidad") String orden, @RequestParam(defaultValue = "asc") String direccion, Model model){
-        Sort sort = Sort.by(direccion.equalsIgnoreCase("asc") ? Sort.Direction.ASC : Sort.Direction.DESC, orden);
-        Pageable pageable = PageRequest.of(pagina, tamaño, sort);
-        Page<Producto> productos = repositorio.findByUsuario(usuarioLog.nombreUsuario(), pageable);
-        model.addAttribute("Proveedoress", repositorioUs.findByUsuarioProveedor(usuarioLog.nombreUsuario()));
-        model.addAttribute("Productoss", productos);
-        model.addAttribute("orden", orden);
-        model.addAttribute("direccion", direccion);
-        return "ProductoUsuario/listaproductos";
-    }*/
 
     @GetMapping("/")
     public String nuevoPedido(Model model) {

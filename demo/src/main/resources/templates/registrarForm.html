@@ -54,7 +54,7 @@
         <div class="container" id="container">
             <div class="form-container sign-up-container">
                 <form th:action="@{/Gestion_Inventarios/guardarUsuario}" method="post" th:object = "${Usuarioss}">
-                    <h1>Create Account</h1>
+                    <h1>CREAR CUENTA</h1>
                     <hr />
                     <div class="group-input">
                         <i class="fa fa-lock"></i>
@@ -111,12 +111,12 @@
                         <i class="fa fa-lock"></i>
                         <input type="password" placeholder="Password" pattern="[*\S$]+" title="Sin espacios" required minlength="6" maxlength="15" th:field="${Usuarioss.Contraseña}"/>
                     </div>
-                    <button type="submit" >Sign Up</button>
+                    <button type="submit" >Entrar</button>
                 </form>
             </div>
             <div class="form-container sign-in-container">
                 <form method="post" th:action="@{/login}">
-                    <h1>Sign in</h1>
+                    <h1>ENTRAR</h1>
                     <hr />
                     <div class="group-input">
                          <i class="fa fa-envelope"></i>
@@ -136,14 +136,14 @@
                     <div class="side-element-panel side-element-left">
                         <h1>Hello!</h1>
                         <p>Enter your personal details and start having fun with us</p>
-                        <button class="ghost" id="signIn">Sign In1</button>
+                        <button class="ghost" id="signIn">ENTRAR</button>
                     </div>
                     <div class="side-element-panel side-element-right">
                         <h1>Welcome!</h1>
                         <p>
                             Happy to see you again, login and have fun with us.
                         </p>
-                        <button class="ghost" id="signUp">Sign Up2</button>
+                        <button class="ghost" id="signUp">REGISTRARSE</button>
                     </div>
                 </div>
             </div>
