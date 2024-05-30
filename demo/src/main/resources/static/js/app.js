@@ -39,8 +39,8 @@ $(document).ready(function() {
 
 function calculateTotal() {
   var cantidadTotal = document.getElementById("Cantidad_total").value;
-  var precioUnitario = document.getElementById("Preciounitario").innerText;
-  var precioTotal = cantidadTotal * parseFloat(precioUnitario);
+  var precioUnitario = parseFloat(document.getElementById("Preciounitario").value);
+  var precioTotal = cantidadTotal * precioUnitario;
   document.getElementById("Precio_total").value = precioTotal;
 }
 
