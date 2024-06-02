@@ -25,8 +25,8 @@
                 </thead>
                 <tbody>
                     <tr th:each="detalle: ${Detalless}">
-                        <td th:text="${detalle.pedido.ID_pedido}"></td>
-                        <td><a th:text="${detalle.producto.Nombre}" th:href="@{/Gestion_Inventarios/Productos/VerProducto/} + ${detalle.producto.ID_Producto}"></a></td>
+                        <td th:text="${detalle.pedido.ID_pedido}"></td>                        
+                        <td><a th:text="${detalle.producto.Nombre}" th:href="@{/Gestion_Inventarios/Productos/MiProducto/} + ${detalle.producto.ID_Producto}"></a></td>
                         <td><a th:text="${detalle.producto.proveedor.Nom_usuario}" th:href="@{/Gestion_Inventarios/Usuario/Proveedor/} + ${detalle.producto.proveedor.ID_Usuario}"></a></td>
                         <td th:text="${detalle.Cantidad_total}"></td>
                         <td th:text="${detalle.pedido.Fecha_entrega}"></td>

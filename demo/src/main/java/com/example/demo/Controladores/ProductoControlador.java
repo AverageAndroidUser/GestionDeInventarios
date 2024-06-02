@@ -76,26 +76,52 @@ public class ProductoControlador {
             producto.setUsuario(usuarioLog.nombreUsuario());
             producto.setProveedor(usuarioLog.nombreUsuario());
         }
-        
         repositorio.save(producto);
         return "redirect:/Gestion_Inventarios/Productos/0";
     }
 
     @GetMapping("BorrarProducto/{id}")
     public String borrarProducto(@PathVariable int id){
-        repositorio.deleteById(id);
-        return "redirect:/Gestion_Inventarios/Productos/0";
+        Producto producto = repositorio.findById(id).get();
+        if(producto.getUsuario() == usuarioLog.nombreUsuario()){
+            repositorio.deleteById(id);
+            return "redirect:/Gestion_Inventarios/Productos/0";
+        }else{
+            return "error";
+        }
     }
 
     @GetMapping("EditarProducto/{id}")
     public String editarProducto(@PathVariable int id, Model model){
-        model.addAttribute("Productoss", repositorio.findById(id).get());
-        return "ProductoUsuario/EditarProducto";
+        Producto producto = repositorio.findById(id).get();
+        if(producto.getUsuario() == usuarioLog.nombreUsuario()){
+            model.addAttribute("Productoss", producto);
+            return "ProductoUsuario/EditarProducto";
+        }else{
+            return "error";
+        }
     }
 
     @GetMapping("/VerProducto/{id}")
     public String verProducto(@PathVariable int id, Model model){
-        model.addAttribute("Procuctoss", repositorio.findById(id).get());
-        return "ProductoUsuario/VerProducto";
+        Producto producto = repositorio.findById(id).get();
+        if(producto.getProveedor().getTipousuario() == 2){
+            model.addAttribute("Procuctoss", producto);
+            return "ProductoUsuario/VerProducto";
+        }else{
+            return "error";
+        }
+        
+    }
+    
+    @GetMapping("/MiProducto/{id}")
+    public String miProducto(@PathVariable int id, Model model){
+        Producto producto = repositorio.findById(id).get();
+        if(producto.getUsuario() == usuarioLog.nombreUsuario()){
+            model.addAttribute("Productoo", producto);
+            return "ProductoUsuario/MiProducto";
+        }else{
+            return "error";
+        }
     }
 }

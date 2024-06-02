@@ -32,6 +32,8 @@
         <div class="container form-container">
             <form method="post" th:action="@{/Gestion_Inventarios/Productos/GuardarProducto/}" th:object="${Productoss}">
                 <input type="hidden" th:field = "${Productoss.ID_Producto}">
+                <input type="hidden" th:field = "${Productoss.usuario}">
+                <input type="hidden" th:field = "${Productoss.proveedor}">
                 <div class="form-group">
                     <label for="nombreProducto">Nombre Producto</label>
                     <input type="text" class="form-control form-control-sm" id="nombreProducto" placeholder="Nombre Producto" th:field="${Productoss.Nombre}" required>
