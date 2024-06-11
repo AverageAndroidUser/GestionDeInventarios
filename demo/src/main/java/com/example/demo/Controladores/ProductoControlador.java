@@ -105,7 +105,7 @@ public class ProductoControlador {
     @GetMapping("/VerProducto/{id}")
     public String verProducto(@PathVariable int id, Model model){
         Producto producto = repositorio.findById(id).get();
-        if(producto.getProveedor().getTipousuario() == 2){
+        if(producto.getUsuario().getTipousuario() == 2){
             model.addAttribute("Procuctoss", producto);
             return "ProductoUsuario/VerProducto";
         }else{
